@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+<script>
+const url = 'https//api.truelayer-sandbox.com/data/v1/cards';
+
+let req = new Request(url);
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjE0NTk4OUIwNTdDOUMzMzg0MDc4MDBBOEJBNkNCOUZFQjMzRTk1MTAiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJGRm1Kc0ZmSnd6aEFlQUNvdW15NV9yTS1sUkEifQ.eyJuYmYiOjE1ODY3ODcxMzYsImV4cCI6MTU4Njc5MDczNiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnRydWVsYXllci1zYW5kYm94LmNvbSIsImF1ZCI6WyJodHRwczovL2F1dGgudHJ1ZWxheWVyLXNhbmRib3guY29tL3Jlc291cmNlcyIsImRhdGFfYXBpIl0sImNsaWVudF9pZCI6InNhbmRib3gtYWY1NmFuYS1mNDNhYWUiLCJzdWIiOiJIbHdBRy9yQ2ZQdlk5UExuOFp4VWhMaUVjbFdZVWtFN1hZeC9iNlNGRDlvPSIsImF1dGhfdGltZSI6MTU4Njc4NzA3MCwiaWRwIjoibG9jYWwiLCJjb25uZWN0b3JfaWQiOiJtb2NrIiwiY3JlZGVudGlhbHNfa2V5IjoiZjU4MjRjMGQxOGM4OGY0YjlhN2Q1M2RhYzE5ZGNmMWYxMzlhODMzMjhhYTFkNmU0NTNlY2JkMTc1NDMxMjViMiIsInByaXZhY3lfcG9saWN5IjoiRmViMjAxOSIsImNvbnNlbnRfaWQiOiI4Mzk2MTY2Ny05Y2QyLTQ0OWYtYTNjZS00OGJmZmFjMjkxMmYiLCJzY29wZSI6WyJpbmZvIiwiYWNjb3VudHMiLCJjYXJkcyIsInRyYW5zYWN0aW9ucyIsImJhbGFuY2UiLCJkaXJlY3RfZGViaXRzIiwic3RhbmRpbmdfb3JkZXJzIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.zet3k-0aVQJ3J3vqJsFiRs8c2XujUOurXsw50lM_EvE3tcGiul0K7BQDsxNKYcrhElp_PPN7WHeuy4XF8zG1OP-E9bBszn2hiPJ5ay3QzNo2gRu6wJM7S0bpu4JP2c9lzkEZoP6j362aKqgZlg-jwigL4JnJa9p9QoFx_Fwi4bDk59XAsLRvRFFA3P0W1n3W79soS0Sp5s_NaPg_AEptluixQxpmWwoKTjRuQiCSbGCZYjq_Y_DljQov52UnFBr9fLas9NeQWfMzJQf3AcPTjTRgIqtijxZpjWQHEO6DPmIvGtVoEpQKiZ1jOFPI1MzSZ3ylrQd84ScBEYjCUe5t3g");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch(req, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+
+
+</script>
+</head>
+<body>
+
+<button>Get JSON data</button>
+
+<div id='data'></div>
+
+</body>
+</html>

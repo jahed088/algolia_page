@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+<script>
+var access_token;
+
+//1
+function getToken(){
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("grant_type", "authorization_code");
+  urlencoded.append("client_id", "sandbox-af56ana-f43aae");
+  urlencoded.append("client_secret", "3ffe1b8f-2520-430d-adb0-5aa0a2bc1bca");
+  urlencoded.append("redirect_uri", "https://console.truelayer-sandbox.com/redirect-page");
+  urlencoded.append("code", "vXctqqpCpZbWOWp8855vpkByMdO2nE_VT9LWb2DFjtA");
+
+  var requestOptions = {
+    method: 'POST',
+    body: urlencoded,
+    redirect: 'follow'
+  };
+
+  fetch("https://auth.truelayer-sandbox.com/connect/token", requestOptions)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(parsedJson) {
+    console.log('This is the parsed json', parsedJson);
+    console.log('access_token', parsedJson.access_token);
+    access_token = parsedJson.access_token;
+    sessionStorage.setItem("token", JSON.stringify(parsedJson.access_token));
+  })
+}
+
+//2A
+function listData(){
+  var sessionToken = JSON.parse(sessionStorage.getItem("token"));
+  const url = 'https://api.truelayer-sandbox.com/data/v1/cards';
+
+  let req = new Request(url);
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer ${sessionToken}");
+  myHeaders.append("Content-Type", "application/json");
+
+  fetch(url, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: myHeaders,
+    redirect:'follow'
+  }).then(function(response) {
+    return response.json();
+  })
+  .then(function(parsedJson) {
+    console.log('This is the parsed json', parsedJson);
+    sessionStorage.setItem("card_id", JSON.stringify(parsedJson[0].card_id));
+  })
+    .catch(error => console.log('error', error));
+}
+
+//2B
+function listBal(){
+  var sessionToken = JSON.parse(sessionStorage.getItem("token"));
+  var cid = JSON.parse(sessionStorage.getItem("card_id"));
+  const url = 'https://api.truelayer-sandbox.com/data/v1/cards/${cid}/balance';
+
+  let req = new Request(url);
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer ${sessionToken}");
+  myHeaders.append("Content-Type", "application/json");
+
+  fetch(url, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: myHeaders,
+    redirect:'follow'
+  }).then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+}
+
+//2C
+function getTrans(){
+  var sessionToken = JSON.parse(sessionStorage.getItem("token"));
+  const url_a = 'https://api.truelayer-sandbox.com/data/v1/accounts/';
+  
+
+  let req = new Request(url);
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer ${sessionToken}");
+  myHeaders.append("Content-Type", "application/json");
+
+  fetch(url_a, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: myHeaders,
+    redirect:'follow'
+  }).then(function(response) {
+    return response.json();
+  })
+  .then(function(parsedJson) {
+    console.log('This is the parsed json', parsedJson);
+    sessionStorage.setItem("account_id", JSON.stringify(parsedJson[0].account_id));
+  })
+    .catch(error => console.log('error', error));
+
+
+    const url_t = 'https://api.truelayer-sandbox.com/data/v1/accounts/${aid}/transactions?from=08-12-2019&to=10-12-2019';
+
+    fetch(url_t, {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: myHeaders,
+      redirect:'follow'
+    }).then(function(response) {
+      return response.json();
+    })
+    .then(function(parsedJson) {
+      console.log('This is the parsed json', parsedJson);
+    })
+      .catch(error => console.log('error', error));
+  }
+
+</script>
+</head>
+<body>
+
+<button id="getToken" onclick="getToken()">Get Token</button>
+<div id='token'></div>
+
+<button id="listData" onclick="listData()">List Data</button>
+<div id='ldata'></div>
+
+<button id="listBal" onclick="listBal()">List Balance</button>
+<div id='lbal'></div>
+
+<button id="listTrans" onclick="listTrans()">List Transaction</button>
+<div id='ltran'></div>
+
+</body>
+</html>

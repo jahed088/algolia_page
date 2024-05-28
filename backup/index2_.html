@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+<script>
+const url = 'https://api.truelayer-sandbox.com/data/v1/cards/http://localhost:8080/';
+
+let req = new Request(url);
+
+fetch(req, {
+  method: 'GET',
+  mode: 'no-cors',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authentication': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjE0NTk4OUIwNTdDOUMzMzg0MDc4MDBBOEJBNkNCOUZFQjMzRTk1MTAiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJGRm1Kc0ZmSnd6aEFlQUNvdW15NV9yTS1sUkEifQ.eyJuYmYiOjE1ODY4MDM4NDUsImV4cCI6MTU4NjgwNzQ0NSwiaXNzIjoiaHR0cHM6Ly9hdXRoLnRydWVsYXllci1zYW5kYm94LmNvbSIsImF1ZCI6WyJodHRwczovL2F1dGgudHJ1ZWxheWVyLXNhbmRib3guY29tL3Jlc291cmNlcyIsImRhdGFfYXBpIl0sImNsaWVudF9pZCI6InNhbmRib3gtYWY1NmFuYS1mNDNhYWUiLCJzdWIiOiJIbHdBRy9yQ2ZQdlk5UExuOFp4VWhMaUVjbFdZVWtFN1hZeC9iNlNGRDlvPSIsImF1dGhfdGltZSI6MTU4NjgwMzgwNywiaWRwIjoibG9jYWwiLCJjb25uZWN0b3JfaWQiOiJtb2NrIiwiY3JlZGVudGlhbHNfa2V5IjoiNGI1YzVhYzM3MTg0M2RhNDAwMzE4YWY4OTA2MTFjNjk0YWQxNTViNDViZmExYTg0OWRkODA0N2VmZjg4ODI3NyIsInByaXZhY3lfcG9saWN5IjoiRmViMjAxOSIsImNvbnNlbnRfaWQiOiJhYTc0MjUwMi1kNTQ5LTRmNWQtOTU4NS05YzM1YTljMjJmODUiLCJzY29wZSI6WyJpbmZvIiwiYWNjb3VudHMiLCJjYXJkcyIsInRyYW5zYWN0aW9ucyIsImJhbGFuY2UiLCJkaXJlY3RfZGViaXRzIiwic3RhbmRpbmdfb3JkZXJzIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.ELSG8UNH3hK_yUqdNBKv6He8VevxRMwL14fYRhRLEB8MzDP-RfbLsZnKB6ndME6IRkOJUHVpibgWIhSkN0rEnUZ-1VtQCQlmrMMddWJz1FqaGyJxgwcuun_RHsv_VJ6_lzWbli4claZgDdgewPxcRTqJRCdphX_kPwV6WlKIx5Oh5Ch-hA2aS9-pbaFenHQWZ9GZ1rAzU2ypSyz07ov4l0bVGa5vY5CNizK8xJymM1VZ3PdWBGqktBnNl57QumzsY7ae0MgnfLap6YpYrTf4cFxZvdnlQBUOdkv0CskK4ztWGR8ScF80iXcJZgjUX7g2LKcuyIqCOtxvSgiYG6j8Sg'
+  }
+})
+
+.then(response => {
+  if(response.ok){
+     return response.json();
+  }else{
+     throw new Error('ERROR HTTP');
+  }
+})
+.then( (jsonData) => {
+   console.log(jsonData);
+})
+
+.catch( (err) => {
+    console.log('ERROR:', err.message)
+});
+
+</script>
+</head>
+<body>
+
+<div id='data'>JSON</div>
+
+</body>
+</html>

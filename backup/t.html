@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+<script>
+var access_token;
+
+//1
+function getToken(){
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("grant_type", "authorization_code");
+  urlencoded.append("client_id", "sandbox-af56ana-f43aae");
+  urlencoded.append("client_secret", "3ffe1b8f-2520-430d-adb0-5aa0a2bc1bca");
+  urlencoded.append("redirect_uri", "https://console.truelayer-sandbox.com/redirect-page");
+  urlencoded.append("code", "5wSai_DcxC1r-dReDUmvgh0wLYNyCkkfKkn8MyNTdjI");
+  urlencoded.append("Content-Type", "application/json");
+
+  var requestOptions = {
+    method: 'POST',
+    body: urlencoded,
+    mode:'no-cors',
+    redirect: 'follow'
+  };
+
+  fetch("https://auth.truelayer-sandbox.com/connect/token", requestOptions)
+  .then(function(response) {
+    return response.text();
+    console.log(response.text())
+;  })
+  .then(function(text) {
+    console.log('This is the parsed json', text);
+    //console.log('access_token', parsedJson.access_token);
+    //access_token = parsedJson.access_token;
+    //essionStorage.setItem("token", JSON.stringify(parsedJson.access_token));
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
+</script>
+</head>
+<body>
+
+<button id="getToken" onclick="getToken()">Get Token</button>
+<div id='token'></div>
+
+<button id="listData" onclick="listData()">List Data</button>
+<div id='ldata'></div>
+
+<button id="listBal" onclick="listBal()">List Balance</button>
+<div id='lbal'></div>
+
+<button id="listTrans" onclick="listTrans()">List Transaction</button>
+<div id='ltran'></div>
+
+</body>
+</html>
