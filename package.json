@@ -5,8 +5,9 @@
   "keywords": [],
   "private": true,
   "dependencies": {
-    "algoliasearch": "4.20.0",
-    "algoliasearch-helper": "3.15.0"
+    "algoliasearch": "^4.23.3",
+    "algoliasearch-helper": "^3.21.0",
+    "convert-csv-to-json": "^2.47.0"
   },
   "devDependencies": {
     "@types/algoliasearch": "3.30.1",

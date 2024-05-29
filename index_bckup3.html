@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="search.css" />
 
-    <!--<script type="module">
+    <script type="module">
 
       
       // default version
      import algoliasearch from 'https://cdn.jsdelivr.net/npm/algoliasearch@4.23.3/dist/algoliasearch.esm.browser.js';
-      </script>-->
+      </script>
     <script src="./index.js"></script>
     
     <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -27,15 +27,40 @@
 
   <body>
     <!-- INTERFACE -->
-    <input type="text" autocomplete="off" id="search-box"/>
+    <div class="page">
+      <input autocomplete="off" id="search-box" id="q" placeholder="Search for a product..." type="text" spellcheck="false"/>
 
-<ul id=container></ul>
-
-<script src="https://cdn.jsdelivr.net/g/algoliasearch@3(algoliasearchLite.min.js),algoliasearch.helper@2"></script>
-
+<div class="hits-wrapper" id=container>
+  <h1>Results</h1>
+  <div id="hits"></div>
+</div>
+      </div>
+    </div>
     <!-- /INTERFACE -->
 
+    <!-- TEMPLATES -->
+    <script type="text/html" id="result-template">
+      
+     <div class="results__item">
+      	<div class="result">
+      		<div class="result__image-container">
+      		</div>
+      		<div class="result__text-container">
+      			<h1 class="result__title">{{name}}</h1>
+      			<p class="result__summary">{{food_type}} | {{neighborhood}} | {{price_range}}</p>
+
+      		</div>
+      	</div>
+      </div>
+    </script>
     
+
+    <script type="text/html" id="no-results-template">
+      <div id="no-results-message">
+      	<p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
+      	<a href="." class='clear-all'>Clear search</a>
+      </div>
+    </script>
     <!-- /TEMPLATES -->
     
 
